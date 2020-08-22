@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define len 100
+void read_file(char *filename,int a[][len], int b[][len], int *n, int *m)
+{
+    FILE *f=fopen(filename, "r");
+    fscanf(f, "%d%d", n, m);
+    char name[20];
+    fseek(f, 2, SEEK_CUR);
+    fgets(name,20, f);
+    for(int i=0; i<*n; i++)
+    {
+        for(int j=0; j<*m; j++)
+        {
+            fscanf(f, "%d", &a[i][j]);
+        }
+    }
+    fseek(f, 2, SEEK_CUR);
+    fgets(name,20, f);
+    for(int i=0; i<*n; i++)
+    {
+        for(int j=0; j<*m; j++)
+        {
+            fscanf(f, "%d", &b[i][j]);
+        }
+    }
+    fclose(f);
+}
+void write_matrix(char *filename,int c[][len],int a[][len], int b[][len], int n, int m)
+{
+    for (int i=0; i<n; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+            c[i][j]=a[i][j]+b[i][j];
+        }
+    }
+    FILE *f=fopen(filename, "a+");
+    fputs("\nMa Tran C\n", f);
+    for (int i=0; i<n; i++)
+    {
+        for (int j=0; j<m; j++)
+        {
+            fprintf(f,"%d\t",c[i][j]);
+        }
+        //in vao tep in
+        fprintf(f,"\n");
+    }
+    fclose(f);
+}
+
+int main()
+{
+    char *f="MA_TRAN.C";
+    int a[len][len],b[len][len], c[len][len];
+    int n, m;
+    printf("MENU\n1, Doc tep MA_TRAN.C\n2, Ghi them ma tran C vao cuoi\n3, Ket thuc.\n");
+    int chon;
+
+    printf("Chon cong viec ban muon lam: ");
+    scanf("%d", &chon);
+    do
+    {
+        printf("Chon cong viec ban muon lam: ");
+    scanf("%d", &chon);
+        switch(chon)
+        {
+        case 1:
+            read_file(f, a, b, &n, &m);
+            break;
+        case 2:
+            write_matrix(f, c, a, b, n, m);
+            break;
+        }
+    }
+    while(chon!=3);
+    return 0;
+}
