@@ -15,13 +15,8 @@ node* tao_node(int n){
 }
 void push(int n){
     node *p=tao_node(n);
-    if(top==NULL){
-        top=p;
-    }
-    else{
-        p->next=top;
-        top=p;
-    }
+	p->next = top;
+	top = p;
 }
 int pop(){
     if (top == NULL){
@@ -43,7 +38,8 @@ void doiCoSo(int n, int coso){
 }
 void hienthi(){
     while(top!=NULL){
-        printf("%d", pop());
+	int n = pop();
+        printf("%c", (n<10)?n+48:n+55);
     }
     printf("\n");
 }
@@ -84,8 +80,9 @@ int main(){
                 printf("\tBan da chon chuyen he co so 16\n");
                 printf("\tNhap so thap phan: ");
                 scanf("%d",&n);
+		doiCoSo(n, 16);
                 printf("So he co so 16 la: ");
-                printf("%x\n",n);
+		hienthi();
                 break;
             case 0:
                 exit(0);
