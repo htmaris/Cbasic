@@ -15,13 +15,8 @@ node* tao_node(int n){
 }
 void push(int n){
     node *p=tao_node(n);
-    if(top==NULL){
-        top=p;
-    }
-    else{
-        p->next=top;
-        top=p;
-    }
+	p->next = top;
+	top = p;
 }
 int pop(){
     if (top == NULL){
